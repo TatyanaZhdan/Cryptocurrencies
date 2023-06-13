@@ -52,7 +52,7 @@ namespace CryptoCurrencies.ApyLibrary
                 historyList.Add(new History
                 {                  
                     Price = Convert.ToDouble(histories[i]["priceUsd"]),
-                    Time = Convert.ToDateTime(histories[i]["time"])
+                    Time = histories[i]["time"].ToString()
                 });
             }
             return historyList;

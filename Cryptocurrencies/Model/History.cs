@@ -9,6 +9,6 @@ namespace CryptoCurrencies.Model
     public class History
     {
         public double Price { get; set; }
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
     }
 }
