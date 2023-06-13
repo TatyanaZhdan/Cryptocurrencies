@@ -14,5 +14,6 @@ namespace CryptoLibrary
         public double Volume { get; set; }
         public double Price { get; set; }
         public List<History> Histories {get;set;}
+        public List<Market> Markets { get;set;}
     }
 }
