@@ -24,7 +24,7 @@ namespace CryptoCurrencies.ApyLibrary
             IList<JToken> currencies = currency["data"].Children().ToList();
             List<Currency> currencyList = new List<Currency>();
             //foreach (JToken token in currencies)
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < currencies.Count; i++)
             
             {
                 currencyList.Add(new Currency
@@ -34,8 +34,8 @@ namespace CryptoCurrencies.ApyLibrary
                     Name = currencies[i]["name"].ToString(),
                     Volume = Convert.ToDouble(currencies[i]["volumeUsd24Hr"]),
                     Price = Convert.ToDouble(currencies[i]["priceUsd"]),
-                    Histories=GetHistories(currencies[i]["id"].ToString()),
-                    Markets=GetMerkets(currencies[i]["id"].ToString())
+                    //Histories=GetHistories(currencies[i]["id"].ToString()),
+                    //Markets=GetMerkets(currencies[i]["id"].ToString())
                 }) ;
             }
             return currencyList;

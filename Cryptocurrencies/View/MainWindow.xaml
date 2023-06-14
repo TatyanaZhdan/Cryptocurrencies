@@ -3,34 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Cryptocurrencies"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600" WindowStartupLocation="CenterScreen" 
+        Title="MainWindow" Height="500" Width="600" WindowStartupLocation="CenterScreen" 
         >
     <Grid Background="#c5d4e8">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions> 
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding SearchText}" Height="30" Width="300" />
+            <Button Grid.Column="1" Command="{Binding SearchCommand}" Content="Пошук" Height="30" Width="100" />
+        </Grid>
         <DataGrid Grid.Row="1"
             Name="dataGrid1"
                 ItemsSource="{Binding Currencies}"
+                  SelectedItem="{Binding SelectedCurrency}"
+                   IsReadOnly="True"
                 CanUserAddRows="False"
                 AutoGenerateColumns="False"
                 HeadersVisibility="All"
-                  Width="465"
-                  Height="225"
+                  Width="470"
+                  Height="340"
                   HorizontalGridLinesBrush="#dedded"
-    RowBackground="#dedded" AlternatingRowBackground="White">
+    RowBackground="#dedded" AlternatingRowBackground="White"
+                  RowHeight="30">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding ShowCurrency}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Rank" Binding="{Binding Path=Rank}" />
+                <DataGridTextColumn Header="Rank" Binding="{Binding Path=Rank}"  />
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="100"/>
                 <DataGridTextColumn Header="Volume24H ($)" Binding="{Binding Path=Volume}" Width="160"/>
                 <DataGridTextColumn Header="Price ($)" Binding="{Binding Path=Price}" Width="160"/>
             </DataGrid.Columns>
                 
 
-            </DataGrid>
+        </DataGrid>
        
     </Grid>
     
