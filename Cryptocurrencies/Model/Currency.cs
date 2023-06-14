@@ -10,6 +10,7 @@ namespace CryptoLibrary
     public class Currency
     {
         public string Id { get; set; }
+        public int Rank { get; set; }
         public string Name { get; set; }
         public double Volume { get; set; }
         public double Price { get; set; }

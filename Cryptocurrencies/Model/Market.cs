@@ -10,6 +10,6 @@ namespace CryptoCurrencies.Model
     {
         public string ExchangeId { get; set;}
         public double Price { get; set; }
-        public string ExchangeUrl { get; set; }
+        
     }
 }
