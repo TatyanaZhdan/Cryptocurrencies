@@ -18,14 +18,14 @@ namespace CryptoCurrencies.ViewModel
 
         public ShowCurrency(Currency currency)
         {
-            this.currency = currency;
+            Currency = currency;
         }
         public Currency Currency
         {
-            get => Currency;
+            get => currency;
             set
             {
-                Currency = value;
+                currency = value;
                 NotifyOfPropertyChanged();
             }
         }
