@@ -17,10 +17,13 @@ namespace CryptoCurrencies.ViewModel
 {
     public class CurrenciesViewModel : BaseNotifyPropertyChanget
     {
-        ApiManager apiManager;
-        Currency selectedCurrency; 
+        private ApiManager apiManager;
+        private Currency selectedCurrency; 
+        private Currency currency1; 
+        private Currency currency2; 
         private string searchText;
-        List<Currency> cur;
+        private List<Currency> cur;
+        private double convertResult;
 
 
         public CurrenciesViewModel()
@@ -58,6 +61,33 @@ namespace CryptoCurrencies.ViewModel
                 NotifyOfPropertyChanged();
             }
         }
+        public Currency Currency1
+        {
+            get => currency1;
+            set
+            {
+                currency1 = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+        public Currency Currency2
+        {
+            get => currency2;
+            set
+            {
+                currency2 = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+        public double ConvertResult
+        {
+            get => convertResult;
+            set
+            {
+                convertResult = value;
+                NotifyOfPropertyChanged();
+            }
+        }
         private void LoadCurrencies()
         {
             
@@ -66,6 +96,9 @@ namespace CryptoCurrencies.ViewModel
         private void InitComands()
         {
             SelectedCurrency = new Currency();
+            Currency1= new Currency();
+            Currency2 = new Currency();
+            ConvertResult = 0;
             ShowCurrency = new RelayCommand(obj =>
             {
                 var win = new Window1(selectedCurrency);
@@ -73,11 +106,15 @@ namespace CryptoCurrencies.ViewModel
             });
             SearchCommand = new RelayCommand(obj => {
                 
-                Currencies = new ObservableCollection<Currency>(cur.Where(item => item.Name.Contains(SearchText)));
+                Currencies = new ObservableCollection<Currency>(cur.Where(item => item.Name.Contains(SearchText) || item.Id.Contains(SearchText)));
+            });
+            ConvertCommand = new RelayCommand(obj => {
+                ConvertResult = Currency1.Price / Currency2.Price;
             });
         }
         public ICommand ShowCurrency { get;private set; }
         public ICommand SearchCommand { get; private set; }
+        public ICommand ConvertCommand { get; private set; }
 
     }
 }

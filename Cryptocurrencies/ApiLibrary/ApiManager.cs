@@ -41,17 +41,14 @@ namespace CryptoCurrencies.ApyLibrary
             return currencyList;
         }
 
-        private List<Market> GetMerkets(string id)
+        public List<Market> GetMerkets(string id)
         {
             string json = networkManager.GetJson(CoinCapApiConfig.BaseUrl + $"/v2/assets/{id}/markets");
             JObject mark = JObject.Parse(json);
             IList<JToken> markets = mark["data"].Children().ToList();
             List<Market> marketList = new List<Market>();
             for (int i = 0; i < markets.Count; i++)
-            {
-                
-
-
+            { 
                 marketList.Add(new Market
                 {
                     ExchangeId = markets[i]["exchangeId"].ToString(),
@@ -61,9 +58,9 @@ namespace CryptoCurrencies.ApyLibrary
             return marketList;
         }
 
-        private List<History> GetHistories(string id)
+        public List<History> GetHistories(string id,string sTime)
         {
-            string json = networkManager.GetJson(CoinCapApiConfig.BaseUrl + $"/v2/assets/{id}/history?interval=d1");
+            string json = networkManager.GetJson(CoinCapApiConfig.BaseUrl + $"/v2/assets/{id}/history?interval={sTime}");
             JObject h = JObject.Parse(json);
             IList<JToken> histories =h["data"].Children().ToList();
             List<History> historyList = new List<History>();
@@ -74,7 +71,7 @@ namespace CryptoCurrencies.ApyLibrary
                 historyList.Add(new History
                 {                  
                     Price = Convert.ToDouble(histories[i]["priceUsd"]),
-                    Time = histories[i]["time"].ToString()
+                    Time = Convert.ToDouble(histories[i]["time"])
                 });
             }
             return historyList;

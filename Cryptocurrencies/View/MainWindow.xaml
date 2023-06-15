@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -19,7 +20,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Text="{Binding SearchText}" Height="30" Width="300" />
-            <Button Grid.Column="1" Command="{Binding SearchCommand}" Content="Пошук" Height="30" Width="100" />
+            <Button Grid.Column="1" Command="{Binding SearchCommand}" Content="Search" Height="30" Width="100" />
         </Grid>
         <DataGrid Grid.Row="1"
             Name="dataGrid1"
@@ -48,7 +49,23 @@
                 
 
         </DataGrid>
-       
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="100 0  ">
+            <ComboBox Margin="10 10"
+                  ItemsSource="{Binding Currencies}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Id"
+                  SelectedItem="{Binding Currency1}"
+                                              >
+            </ComboBox>
+            <ComboBox Margin="10 10"
+                  ItemsSource="{Binding Currencies}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Id"
+                  SelectedItem="{Binding Currency2}"                                             >
+            </ComboBox>
+            <Button Margin="10 10" Command="{Binding ConvertCommand}" Content="Convert" Height="30" Width="100" />
+            <TextBox Margin="10 10" Width="200" Height="30" Text="{Binding ConvertResult}"></TextBox>
+        </StackPanel>
     </Grid>
     
 </Window>
